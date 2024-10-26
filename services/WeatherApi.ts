@@ -1,9 +1,9 @@
 import "jsr:@std/dotenv/load";
 
 export class WeatherAPI {
-  #apiKey: string;
-  #geoBaseUrl: string;
-  #oneCallBaseUrl: string;
+  readonly #apiKey: string;
+  readonly #geoBaseUrl: string;
+  readonly #oneCallBaseUrl: string;
 
   constructor() {
     const apiKey = Deno.env.get("OPENWEATHER_API_KEY");
