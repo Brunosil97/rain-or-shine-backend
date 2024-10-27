@@ -10,7 +10,8 @@ This is a weather API backend service built using [Deno](https://deno.land/), a 
 ## Project Structure
 
 - **`server.ts`**: The entry point for running the Deno HTTP server.
-- **`services/WeatherAPI.ts`**: Contains the `WeatherAPI` class, which handles interaction with the OpenWeatherMap API (both geocoding and weather data fetching).
+- **`services/WeatherApi.ts`**: Contains the `WeatherAPI` class, which handles interaction with the OpenWeatherMap API (both geocoding and weather data fetching).
+- **`services/CitiesApi.ts`**: Contains the `CitiesAPI` class, which handles interaction with CountriesNow API (retrieving all cities per country).
 
 ## Requirements
 
