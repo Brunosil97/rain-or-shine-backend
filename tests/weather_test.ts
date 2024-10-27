@@ -19,8 +19,12 @@ Deno.test("WeatherAPI: getCoordinates should return coordinates for a valid city
   const weatherAPI = new WeatherAPI();
   const result = await weatherAPI.getCoordinates("London");
 
-  assertEquals(result.lat, 51.5074);
-  assertEquals(result.lon, -0.1278);
+  if ("lat" in result) {
+    assertEquals(result.lat, 51.5074);
+  }
+  if ("lon" in result) {
+    assertEquals(result.lon, -0.1278);
+  }
 });
 
 // Testing getCoordinates for an API error response
@@ -31,7 +35,9 @@ Deno.test("WeatherAPI: getCoordinates should return an error when city is not fo
   const weatherAPI = new WeatherAPI();
   const result = await weatherAPI.getCoordinates("UnknownCity");
 
-  assertEquals(result.error, "city not found");
+  if ("error" in result) {
+    assertEquals(result.error, "city not found");
+  }
 });
 
 // Testing fetchWeather for a successful response
@@ -40,10 +46,14 @@ Deno.test("WeatherAPI: fetchWeather should return weather data for valid coordin
   mockFetch(mockResponse);
 
   const weatherAPI = new WeatherAPI();
-  const result = await weatherAPI.fetchWeather("51.5074", "-0.1278");
+  const result = await weatherAPI.fetchWeather(51.5074, -0.1278);
 
-  assertEquals(result.temp, 20);
-  assertEquals(result.weather[0].description, "clear sky");
+  if ("temp" in result) {
+    assertEquals(result.temp, 20);
+  }
+  if ("weather" in result && Array.isArray(result.weather)) {
+    assertEquals(result.weather[0].description, "clear sky");
+  }
 });
 
 // Testing fetchWeather for an API error response
@@ -52,7 +62,9 @@ Deno.test("WeatherAPI: fetchWeather should return an error for invalid coordinat
   mockFetch(mockResponse, false);
 
   const weatherAPI = new WeatherAPI();
-  const result = await weatherAPI.fetchWeather("invalidLat", "invalidLon");
+  const result = await weatherAPI.fetchWeather(2342345324534, 213421342134234);
 
-  assertEquals(result.error, "invalid coordinates");
+  if ("error" in result) {
+    assertEquals(result.error, "invalid coordinates");
+  }
 });

@@ -91,5 +91,5 @@ Example Response:
 Deno provides a built-in testing framework. You can run all tests in your project with the following command:
 
 ```bash
-deno test --allow-net --allow-env --allow-read tests/weather_tests.ts
+deno test --allow-net --allow-env --allow-read tests/
 ```
